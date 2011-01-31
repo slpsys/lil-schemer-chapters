@@ -4,4 +4,10 @@
 (require "little_schemer_ch3.ss")
 (require "little_schemer_ch4.ss")
 
-(atom? 1)
+(define rember* 
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((eqan? a (car l)) (rember* a (cdr l)))
+      ((not (atom? (car l))) (cons (rember* a (car l)) (rember* a (cdr l))))
+      (else (cons (car l) (rember* a (cdr l)))))))
