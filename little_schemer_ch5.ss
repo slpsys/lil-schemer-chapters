@@ -19,3 +19,11 @@
       ((eqan? o (car l)) (cons o (cons n (insertR* n o (cdr l)))))
       ((atom? (car l)) (cons (car l) (insertR* n o (cdr l))))
       (else (cons (insertR* n o (car l)) (insertR* n o (cdr l)))))))
+
+(define occur* 
+  (lambda (a l)
+    (cond 
+      ((null? l) 0)
+      ((eqan? a (car l)) (add1 (occur* a (cdr l))))
+      ((atom? (car l)) (occur a (cdr l)))
+      (else (plus (occur* a (car l)) (occur* a (cdr l)))))))
