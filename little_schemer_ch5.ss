@@ -9,5 +9,13 @@
     (cond
       ((null? l) '())
       ((eqan? a (car l)) (rember* a (cdr l)))
-      ((not (atom? (car l))) (cons (rember* a (car l)) (rember* a (cdr l))))
-      (else (cons (car l) (rember* a (cdr l)))))))
+      ((atom? (car l)) (cons (car l) (rember* a (cdr l))))
+      (else (cons (rember* a (car l)) (rember* a (cdr l)))))))
+
+(define insertR*
+  (lambda (n o l)
+    (cond
+      ((null? l) '())
+      ((eqan? o (car l)) (cons o (cons n (insertR* n o (cdr l)))))
+      ((atom? (car l)) (cons (car l) (insertR* n o (cdr l))))
+      (else (cons (insertR* n o (car l)) (insertR* n o (cdr l)))))))
