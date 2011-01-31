@@ -27,3 +27,11 @@
       ((eqan? a (car l)) (add1 (occur* a (cdr l))))
       ((atom? (car l)) (occur a (cdr l)))
       (else (plus (occur* a (car l)) (occur* a (cdr l)))))))
+
+(define subst*
+  (lambda (n o l)
+    (cond
+      ((null? l) '())
+      ((eqan? o (car l)) (cons n (subst* n o (cdr l))))
+      ((atom? (car l)) (cons (car l) (subst* n o (cdr l))))
+      (else (cons (subst* n o (car l)) (subst* n o (cdr l)))))))
