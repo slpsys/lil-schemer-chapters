@@ -4,6 +4,15 @@
 (require "little_schemer_ch3.ss")
 (require "little_schemer_ch4.ss")
 
+(provide rember*)
+(provide insertR*)
+(provide occur*)
+(provide subst*)
+(provide insertL*)
+(provide member*)
+(provide leftmost)
+(provide eqlist?)
+
 (define rember* 
   (lambda (a l)
     (cond
@@ -43,3 +52,31 @@
       ((eqan? o (car l)) (cons n (cons o (insertL* n o (cdr l)))))
       ((atom? (car l)) (cons (car l) (insertL* n o (cdr l))))
       (else (cons (insertL* n o (car l)) (insertL* n o (cdr l)))))))
+
+(define member*
+  (lambda (a l)
+    (cond
+      ((null? l) #f)
+      ((eqan? a (car l)) #t)
+      ((atom? (car l)) (member* a (cdr l)))
+      (else (or (member* a (car l)) (member* a (cdr l)))))))
+
+(define leftmost
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else (leftmost (car l))))))
+
+(define eqlist?
+  (lambda (a b)
+    (cond
+      ((null? a) (null? b))
+      ((null? b) #f)
+      ((atom? a) (and (atom? b) (eqan? a b)))
+      ((atom? b) #f)
+      ((null? (car a)) (null? (car b)))
+      ((null? (car b)) #f)
+      ((null? (cdr a)) (and (null? (cdr b)) (eqlist? (car a) (car b))))
+      ((null? (cdr b)) #f)
+      (else (and (eqlist? (car a) (car b)) (eqlist? (cdr a) (cdr b)))))))
