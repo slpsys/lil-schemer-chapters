@@ -80,3 +80,19 @@
       ((null? (cdr a)) (and (null? (cdr b)) (eqlist? (car a) (car b))))
       ((null? (cdr b)) #f)
       (else (and (eqlist? (car a) (car b)) (eqlist? (cdr a) (cdr b)))))))
+
+(define equal?
+  (lambda (a b)
+    (cond
+      ((and (atom? a) (atom? b) (eqan? a b)))
+      ((or (atom? a) (atom? b)) #f)
+      (else (eqlist2? a b)))))
+
+(define eqlist2?
+  (lambda (l1 l2)
+    (cond
+      ((and (null? l1) (null? l2)) #t)
+      ((or (null? l1) (null? l2)) #f)
+      (and (equal? (car l1) (car l2)) (equal? (cdr l1) (cdr l2)))
+      )
+    ))
