@@ -12,6 +12,7 @@
 (provide member*)
 (provide leftmost)
 (provide eqlist?)
+(provide equal)
 
 (define rember* 
   (lambda (a l)
@@ -68,7 +69,7 @@
       ((atom? (car l)) (car l))
       (else (leftmost (car l))))))
 
-(define eqlist?
+(define eqlist_1?
   (lambda (a b)
     (cond
       ((null? a) (null? b))
@@ -77,18 +78,18 @@
       ((atom? b) #f)
       ((null? (car a)) (null? (car b)))
       ((null? (car b)) #f)
-      ((null? (cdr a)) (and (null? (cdr b)) (eqlist? (car a) (car b))))
+      ((null? (cdr a)) (and (null? (cdr b)) (eqlist_1? (car a) (car b))))
       ((null? (cdr b)) #f)
-      (else (and (eqlist? (car a) (car b)) (eqlist? (cdr a) (cdr b)))))))
+      (else (and (eqlist_1? (car a) (car b)) (eqlist_1? (cdr a) (cdr b)))))))
 
 (define equal?
   (lambda (a b)
     (cond
       ((and (atom? a) (atom? b) (eqan? a b)))
       ((or (atom? a) (atom? b)) #f)
-      (else (eqlist2? a b)))))
+      (else (eqlist? a b)))))
 
-(define eqlist2?
+(define eqlist?
   (lambda (l1 l2)
     (cond
       ((and (null? l1) (null? l2)) #t)
