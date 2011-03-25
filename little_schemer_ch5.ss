@@ -93,6 +93,5 @@
     (cond
       ((and (null? l1) (null? l2)) #t)
       ((or (null? l1) (null? l2)) #f)
-      (and (equal? (car l1) (car l2)) (equal? (cdr l1) (cdr l2)))
-      )
-    ))
+      (else (and (equal? (car l1) (car l2)) (equal? (cdr l1) (cdr l2)))))))
+
