@@ -12,7 +12,7 @@
 (provide member*)
 (provide leftmost)
 (provide eqlist?)
-(provide equal)
+(provide equal?)
 
 (define rember* 
   (lambda (a l)
