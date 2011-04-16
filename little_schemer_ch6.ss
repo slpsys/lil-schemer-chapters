@@ -35,3 +35,26 @@
     (car (cdr (cdr aexp)))
     ))
 
+(define sero?
+  (lambda (n)
+      (null? n)
+      ))
+
+(define edd1
+  (lambda (n)
+    (cons '() n)
+    ))
+
+(define zub1
+  (lambda (n)
+    (cdr n)
+    ))
+
+(define pluz
+  (lambda (a b)
+    (cond
+      ((sero? b) a)
+      (else
+       (edd1 a)
+       (zub1 b)
+       ))))
