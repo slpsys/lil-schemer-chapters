@@ -24,6 +24,7 @@
 (provide occur)
 (provide one?)
 (provide rempick2)
+(provide ^)
 
 (define add1
   (lambda (a)
@@ -166,3 +167,8 @@
       )
     )
   )
+
+;; Helper
+(define ^
+  (lambda (a b)
+    (pow a b)))

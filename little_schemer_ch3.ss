@@ -94,4 +94,3 @@
       ((null? l) (list))
       ((eq? old (car l)) (cons new (multisubst new old (cdr l))))
       (else (cons (car l) (multisubst new old (cdr l)))))))
-

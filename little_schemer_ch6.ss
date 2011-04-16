@@ -9,11 +9,29 @@
   (lambda (aexp) 
     (cond
       ((atom? aexp) (number? aexp))
-      ((eq? '+ (car (cdr aexp))) (and (numbered? (cdr (cdr aexp))) (numbered? (car aexp))))
-      ((eq? 'x (car (cdr aexp))) (and (numbered? (cdr (cdr aexp))) (numbered? (car aexp))))
-      ((eq? '^ (car (cdr aexp))) (and (numbered? (cdr (cdr aexp))) (numbered? (car aexp))))
-      (else #f)
+      (else (and (numbered? (car aexp)) (numbered? (car (cdr (cdr aexp))))))
       )
     ))
 
-(numbered? '(3 * 2))
+(define value
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      ((eq? '+ (operator nexp)) (+ (value (1st-subexp nexp)) (value (2nd-subexp nexp))))
+      ((eq? '* (operator nexp)) (* (value (1st-subexp nexp)) (value (2nd-subexp nexp))))
+      ((eq? '^ (operator nexp)) (^ (value (1st-subexp nexp)) (value (2nd-subexp nexp))))
+    )))
+    
+(define operator
+  (lambda (op)
+    (car (cdr op))
+    ))
+(define 1st-subexp
+  (lambda (aexp)
+    (car aexp)
+    ))
+(define 2nd-subexp
+  (lambda (aexp)
+    (car (cdr (cdr aexp)))
+    ))
+
