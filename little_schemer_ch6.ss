@@ -5,6 +5,16 @@
 (require "little_schemer_ch4.ss")
 (require "little_schemer_ch5.ss")
 
+(provide numbered?)
+(provide value)
+(provide operator)
+(provide 1st-subexp)
+(provide 2nd-subexp)
+(provide sero?)
+(provide edd1)
+(provide zub1)
+(provide pluz)
+
 (define numbered? 
   (lambda (aexp) 
     (cond
@@ -55,6 +65,5 @@
     (cond
       ((sero? b) a)
       (else
-       (edd1 a)
-       (zub1 b)
+       (pluz (edd1 a) (zub1 b))
        ))))
